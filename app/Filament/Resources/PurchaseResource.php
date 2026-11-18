@@ -51,6 +51,35 @@ class PurchaseResource extends Resource
                             ->label('Total Biaya'),
                     ])->columns(2),
 
+                Forms\Components\Section::make('Daftar Item Produk')
+                    ->schema([
+                        Forms\Components\Repeater::make('purchaseItems')
+                            ->relationship('purchaseItems')
+                            ->schema([
+                                Forms\Components\Select::make('produk_id')
+                                    ->relationship('produk', 'nama')
+                                    ->required()
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Produk'),
+
+                                Forms\Components\TextInput::make('jumlah')
+                                    ->numeric()
+                                    ->required()
+                                    ->default(1)
+                                    ->label('Jumlah (Qty)'),
+
+                                Forms\Components\TextInput::make('harga_beli')
+                                    ->numeric()
+                                    ->required()
+                                    ->prefix('Rp')
+                                    ->label('Harga Beli Satuan')
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull()
+                            ->label('Item Barang'),
+                    ]),
+
                 Forms\Components\Section::make('Catatan Tambahan')
                     ->schema([
                         Forms\Components\Textarea::make('catatan')

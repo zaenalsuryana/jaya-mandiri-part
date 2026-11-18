@@ -34,7 +34,7 @@ class Purchase extends Model
         return $this->belongsTo(Pemasok::class);
     }
 
-    public function items()
+    public function purchaseItems()
     {
         return $this->hasMany(PurchaseItem::class);
     }
